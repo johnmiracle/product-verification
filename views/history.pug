@@ -1,0 +1,35 @@
+extends layout
+include ./mixins/_flash-messages
+
+block content
+    .container
+        +flashMessages()
+        br
+        .col-sm-12
+            h2 History
+        br                    
+        .col-sm-12.top-pad-10
+            if (histories.length > 0)
+                .table-responsive.text-nowrap
+                    table.table.table-hover.table-fixed
+                        thead
+                            tr
+                            th Name
+                            th Surname
+                            th Phone Number
+                            th Product Name
+                            th Serial Number
+                        each history in histories
+                            tbody
+                                tr
+                                td #{user.firstName}
+                                td #{user.lastName}
+                                td 0#{user.phone}
+                                td #{history.usedSerial_Prouct_Name || "No Product Name"}
+                                td #{history.usedSerial}
+            else
+                .card-content
+                    center.p-5
+                        h2
+                            | History empty                    
+        

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    .container
+      .row
+        .col-md-3
+        .col-md-6
+            .container.mt-5
+                form(method='POST', action='/verify-product')
+                    .md-form
+                        input#form1.form-control(type='number' name="code" required="")
+                        label(for='form1') Product Code
+                    button.btn.btn-block.btn-primary(type='submit') Verify
+        .col-md-3
+        
