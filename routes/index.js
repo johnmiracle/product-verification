@@ -55,7 +55,7 @@ router.post("/verify-product", isAuthenticated, async function (
       usedSerial: verifyProduct.serial,
       code: verifyProduct.code,
       usedSerial_Prouct_Name: verifyProduct.product,
-      piont: verifyProduct.point,
+      point: verifyProduct.point,
     });
 
     // Point calculator
