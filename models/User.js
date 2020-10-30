@@ -21,6 +21,10 @@ const Userschema = new mongoose.Schema({
     type: String,
     required: [true, "Please this field is required"],
   },
+  points: {
+    type: Number,
+    default: 0
+  }
 });
 
 module.exports = mongoose.model("User", Userschema);

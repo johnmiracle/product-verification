@@ -13,7 +13,10 @@ html
   body
     // Navbar
     nav.mb-1.navbar.navbar-expand-lg.navbar-dark.info-color
-      a.navbar-brand(href='/') Navbar
+      if user
+        a.navbar-brand(href='/product-verify') Navbar
+      else
+        a.navbar-brand(href='/') Navbar
       button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent-4' aria-controls='navbarSupportedContent-4' aria-expanded='false' aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarSupportedContent-4.collapse.navbar-collapse

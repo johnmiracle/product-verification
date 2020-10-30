@@ -5,8 +5,11 @@ block content
     .container
         +flashMessages()
         br
-        .col-sm-12
-            h2 History
+        .row
+            .col-sm-6
+                h2 History
+            .box.ml-auto
+                h2 #{user.points} Points
         br                    
         .col-sm-12.top-pad-10
             if (histories.length > 0)
@@ -14,19 +17,19 @@ block content
                     table.table.table-hover.table-fixed
                         thead
                             tr
-                            th Name
-                            th Surname
                             th Phone Number
                             th Product Name
                             th Serial Number
+                            th Code
+                            th Point
                         each history in histories
                             tbody
                                 tr
-                                td #{user.firstName}
-                                td #{user.lastName}
                                 td 0#{user.phone}
                                 td #{history.usedSerial_Prouct_Name || "No Product Name"}
                                 td #{history.usedSerial}
+                                td #{history.code}
+                                td #{history.point || "No point"}
             else
                 .card-content
                     center.p-5

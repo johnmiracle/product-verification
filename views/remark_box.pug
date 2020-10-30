@@ -15,14 +15,15 @@ block content
                                     .icon-box
                                         center
                                             i.font-circle.fas.fa-check
+                                        h3.pt-3 You have been awarded #{point} points
                                 .modal-body.text-center
                                     h4 Great!
                                     p.model-text
-                                        | Hello #{user.firstName}, 
+                                        | Hello #{user.firstName},
+                                        br
+                                        | 
                                         br
                                         | #{msg}
-                                    a.btn.btn-success(href="/product-verify", data-dismiss='modal')
-                                        span 
-                                            |Continue  
+                                    a.btn.btn-success(href="/product-verify", data-dismiss='modal') Continue
                                         i.material-icons
             .col-md-3

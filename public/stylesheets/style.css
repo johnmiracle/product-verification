@@ -3,7 +3,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
 }
 
 /* Login */
@@ -60,7 +60,6 @@ a {
   padding: 35px;
 }
 
-
 .modal-confirm h4 {
   text-align: center;
   font-size: 36px;
@@ -103,7 +102,7 @@ a {
 }
 
 .modal-confirm.modal-dialog {
-  margin-top: 80px;
+  margin-top: 50px;
 }
 
 .modal-confirm .btn {
@@ -150,4 +149,23 @@ a {
   text-align: center !important;
   justify-self: center !important;
   margin-left: 170px;
+}
+
+.box {
+  background: rgb(108, 216, 108);
+  padding: 0.3rem 0.7rem 0rem 0.7rem;
+  border: 0.2rem, solid, rgb(108, 216, 108);
+  border-radius: 1rem;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+.point-box {
+  border: 0.2rem, solid, rgb(108, 216, 108);
+  background: rgb(108, 216, 108);
+  border-radius: 0.5rem;
+  padding: 2.5rem 0.5rem 2.5rem 0.5rem;
+  color: #fff;
+  font-family: sans-serif;
+  text-align: center;
 }

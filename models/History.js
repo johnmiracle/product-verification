@@ -11,15 +11,19 @@ const Historyschema = new mongoose.Schema({
   },
   usedSerial: {
     type: Number,
-    required: [true, "please this field is required"],
     trim: true,
-    unique: true,
   },
   usedSerial_Prouct_Name: {
     type: String,
     required: [true, "please this field is required"],
     trim: true,
+  },
+  code: {
+    type: Number,
     unique: true,
+  },
+  point: {
+    type: Number,
   },
 });
 

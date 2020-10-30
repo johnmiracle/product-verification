@@ -20,11 +20,11 @@ router.get("/product-verify", isAuthenticated, function (req, res, next) {
   res.render("product-verify");
 });
 
-router.get("/remark_box", function (req, res, next) {
+router.get("/remark_box", isAuthenticated, function (req, res, next) {
   res.render("remark_box");
 });
 
-router.get("/false_remark", function (req, res, next) {
+router.get("/false_remark", isAuthenticated, function (req, res, next) {
   res.render("false_remark");
 });
 
@@ -33,14 +33,11 @@ router.post("/verify-product", isAuthenticated, async function (
   res,
   next
 ) {
-  const code = req.body.code;
+  const codeNumber = req.body.codeNumber;
 
-  let verifyProduct = data.products.find((x) => x.serial == code);
+  let verifyProduct = data.products.find((x) => x.code == codeNumber);
 
-  let historyResult = await History.findOne({ usedSerial: code });
-
-  console.log(`verify Product is ` + verifyProduct);
-  console.log(`search result is ` + historyResult);
+  let historyResult = await History.findOne({ code: codeNumber });
 
   if (!verifyProduct) {
     res.render("false_remark", {
@@ -56,16 +53,37 @@ router.post("/verify-product", isAuthenticated, async function (
       user: req.user,
       Date: new Date(),
       usedSerial: verifyProduct.serial,
+      code: verifyProduct.code,
       usedSerial_Prouct_Name: verifyProduct.product,
+      piont: verifyProduct.point,
     });
-    newHistory.save();
+
+    // Point calculator
+    // user point
+    let userPoint = req.user.points;
+
+    // product point
+    let productpoint = verifyProduct.point;
+
+    // sum of prouct point and userpoint
+    let updatedPoint = userPoint + productpoint;
+
+    // Update User Point
+    await User.updateOne({ _id: req.user }, { $set: { points: updatedPoint } });
+
+    // Save New History
+    await newHistory.save();
+
     res.render("remark_box", {
       msg: `${
         "Your Product " +
         verifyProduct.product +
-        " is Authentic with serial number" +
-        verifyProduct.serial
+        " is Authentic with serial number " +
+        verifyProduct.serial +
+        " and product code " +
+        verifyProduct.code
       }`,
+      point: verifyProduct.point,
     });
   }
 });
@@ -128,16 +146,8 @@ router.post("/register", async function (req, res, next) {
 });
 
 router.get("/history", isAuthenticated, async function (req, res, next) {
-  await History.find({ user: req.user }, (err, histories) => {
-    if (err) {
-      req.flash("danger", "Error loading order, Please try again");
-      res.redirect("/product-verify");
-      return;
-    } else {
-      console.log(histories);
-      res.render("history", { histories });
-    }
-  });
+  const histories = await History.find({ user: req.user });
+  res.render("history", { histories });
 });
 
 router.get("/logout", function (req, res, next) {
