@@ -1,0 +1,31 @@
+extends dashboard
+
+include ./mixins/_flash-messages
+
+block content
+    .container
+        h2.mt-5 Users
+            .row
+                .col-ml-12
+                    if (users.length > 0)
+                        .table-responsive.text-nowrap
+                            table.table.table-hover.table-fixed
+                                thead
+                                    tr
+                                    th User ID
+                                    th First Name
+                                    th Last Name
+                                    th Points
+                                    th Account
+                                    th Activities
+                                each user in users
+                                    tbody
+                                        tr
+                                        td 0#{user.phone}
+                                        td #{user.firstName}
+                                        td #{user.lastName}
+                                        td #{user.points}
+                                        td #{user.account}
+                                        td 
+                                            a.text-success(href='/users/'+user._id ) 
+                                                b View user

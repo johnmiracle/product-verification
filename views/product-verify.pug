@@ -3,13 +3,13 @@ include ./mixins/_flash-messages
 
 block content
     .container
-        +flashMessages().mt-5
-        .row
+        .row.mt-5
             .col-md-3
             .col-md-6
+                +flashMessages()
                 .container.mt-5
                     .point-box.mb-3
-                        h3 #{user.points} Points.
+                        h3 #{scanCount} scans
                     form.pt-4(method='POST', action='/verify-product')
                         .md-form
                             input#form1.form-control(type='number' name="codeNumber" required="")

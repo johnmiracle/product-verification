@@ -7,13 +7,20 @@ const Productschema = new mongoose.Schema({
     trim: true,
   },
   serial: {
-    type: Number,
+    type: String,
     required: [true, "please this field is required"],
   },
-  code: {
-    type: Number,
+  batch_no: {
+    type: String,
+    required: [true, "please this field is required"],
+  },
+  pin_code: {
+    type: String,
     required: [true, "please this field is required"],
     unique: true,
+  },
+  QRcode: {
+    type: String,
   },
   points: {
     type: Number,

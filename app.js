@@ -7,10 +7,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const flash = require("connect-flash");
 const passport = require("passport");
+const { Strategy } = require("passport-twitter", "passport-google-oauth20");
 const session = require("express-session");
 
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+const userRouter = require("./routes/users");
 
 const app = express();
 
@@ -77,7 +78,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/user", userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

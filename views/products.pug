@@ -1,0 +1,35 @@
+extends dashboard
+
+include ./mixins/_flash-messages
+
+block content
+    .container
+        h2.mt-5 Products
+            .row
+                .col-ml-12
+                    if (results.length > 0)
+                        .table-responsive.text-nowrap
+                            table.table.table-hover.table-fixed
+                                thead
+                                    tr
+                                    th S/N
+                                    th Product Name
+                                    th Batch No
+                                    th Pin Code
+                                    th Point
+                                    th QR Code Image
+                                each result in results
+                                    tbody
+                                        tr
+                                        td #{result.serial}
+                                        td #{result.product}
+                                        td #{result.batch_no}    
+                                        td #{result.pin_code}
+                                        td #{result.points}
+                                        td 
+                                            a.btn.btn-primary.btn-sm(href=''+result.QRcode, download='QRcode.png' type="button") Download    
+                    else
+                        .card-content
+                            center.p-5
+                                h2
+                                    | Products empty     
