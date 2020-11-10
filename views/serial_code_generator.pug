@@ -1,0 +1,23 @@
+extends dashboard
+include ./mixins/_flash-messages
+
+block content
+    .container
+        .row
+            .col-md-3
+            .col-md-6
+                +flashMessages()
+                form.pt-4(method='POST', action='/code-generate')
+                    .md-form
+                        // Product Name
+                        input#defaultSubscriptionForm.form-control.mb-4(type='text' placeholder='Product Name' name="productName")
+                        // Batch Number
+                        input#defaultSubscriptionForm.form-control.mb-4(type='text' placeholder='Product Batch Number' name="batch")
+                        // Serial Number
+                        input#defaultSubscriptionForm.form-control.mb-4(type='text' placeholder='Product Serial Number' name="serial") 
+                        // Pin Code Number
+                        input#defaultSubscriptionForm.form-control.mb-4(type='text' placeholder='Product Code Number' name="code")                       
+                        // Point
+                        input#defaultSubscriptionForm.form-control.mb-4(type='Number' placeholder='Point' name="point")
+                    button.btn.btn-block.btn-primary.mt-5(type='submit') Generate
+            .col-md-3

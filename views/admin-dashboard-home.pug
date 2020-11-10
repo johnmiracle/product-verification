@@ -1,0 +1,25 @@
+extends dashboard
+
+include ./mixins/_flash-messages
+
+block content
+    .container
+        center
+            .row.mt-5
+                +flashMessages()
+                .col-md-6.mt-5
+                    .userBox
+                        h2.header-text Total number of registered users
+                        | #{registeredUsers}
+                .col-md-6.mt-5
+                    .userBox
+                        h2.header-text Total number of products
+                        | #{products}
+                .col-md-6.mt-5
+                    .userBox
+                        h2.header-text Total number of used pin codes
+                        | #{usedPin}
+                .col-md-6.mt-5
+                    .userBox
+                        h2.header-text Total number of used pin codes
+                        | 10 Users

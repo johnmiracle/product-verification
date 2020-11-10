@@ -1,0 +1,28 @@
+extends layout
+include ./mixins/_flash-messages
+
+block content
+    // Modal
+    .container
+        .row
+            .col-md-3
+            .col-md-6
+                .container
+                    #myModal
+                        .modal-dialog.modal-confirm
+                            .modal-content
+                                .modal-header-false
+                                    .icon-box
+                                        center
+                                            i.font-circle.fas.fa-times
+                                .modal-body.text-center
+                                    h4 BAD!!!
+                                    p.model-text
+                                        | Hello #{user.firstName}, 
+                                        br
+                                        | #{msg}
+                                    a.btn.btn-success(href="/product-verify", data-dismiss='modal')
+                                        span 
+                                            | Continue  
+                                        i.material-icons
+            .col-md-3
