@@ -1,5 +1,6 @@
 extends layout
 include ./mixins/_flash-messages
+ - const qrScanner = new QrScanner(videoElem, result => console.log('decoded qr code:', result));
 
 block content
     .container

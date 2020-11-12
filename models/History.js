@@ -11,7 +11,9 @@ const Historyschema = new mongoose.Schema({
   },
   usedSerial: {
     type: Number,
-    trim: true,
+  },
+  batch: {
+    type: Number,
   },
   usedSerial_Prouct_Name: {
     type: String,

@@ -11,6 +11,34 @@ const qrcode = require("qrcode");
 const Json2csvParser = require("json2csv").Parser;
 const fs = require("fs");
 const path = require("path");
+const QrScanner = require("qr-scanner");
+
+const { JSDOM } = require("jsdom");
+const { window } = new JSDOM("");
+const $ = require("jquery")(window);
+global.document = new JSDOM().window.document;
+
+const jsdom = require("jsdom");
+const { htmlPrefilter } = require("jquery");
+window.QRScanner;
+
+// this.video.setAttribute("playsinline", null)
+
+
+router.get("/scan", function (req, res, next) {
+  res.render("scan");
+});
+
+router.get("/qr-scanner", function (req, res, next) {
+
+  res.render("scan")
+  // let scan = req.body.scan;
+
+  // const qrScanner = new QrScanner(videoElem, (result) =>
+  //   console.log("decoded qr code:", result)
+  // );
+
+});
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -317,8 +345,16 @@ router.get("/users/:id", isAuthenticated, isAdmin, async function (
   res,
   next
 ) {
-  const users = await User.find({});
-  res.render("user", { users });
+  try {
+    let id = req.params.id;
+    const histories = await History.find({ user: req.params.id }).populate(
+      "user"
+    );
+    res.render("user", { histories });
+  } catch (error) {
+    req.flash("");
+    res.render("users");
+  }
 });
 
 router.get("/export", isAuthenticated, isAdmin, async function (
@@ -381,15 +417,20 @@ router.get("/export", isAuthenticated, isAdmin, async function (
   // res.render("user", { users });
 });
 
-router.get("/used-products", isAuthenticated, isAdmin, async function (
+
+router.get("/used_product", isAuthenticated, isAdmin, async function (
   req,
   res,
   next
 ) {
-  const datas = await History.find({});
   try {
-    res.render("", { datas });
-  } catch (err) {}
+    const histories = await History.find({}).populate("user");
+    res.render("used-product", { histories });
+  } catch (error) {
+    console.log(error)
+    req.flash("");
+    res.redirect("/used_product");
+  }
 });
 
 module.exports = router;

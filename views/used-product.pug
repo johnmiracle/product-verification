@@ -13,21 +13,21 @@ block content
                         table.table.table-hover.table-fixed
                             thead
                                 tr
-                                th User ID
                                 th Product Name
                                 th Pin Code
                                 th Serial No
                                 th Batch No
                                 th Point
+                                th user
                             each history in histories
                                 tbody
                                     tr
-                                    td 0#{history.user.phone}
                                     td #{history.usedSerial_Prouct_Name}
                                     td #{history.code}
                                     td #{history.usedSerial}
                                     td 1234
                                     td #{history.point}
+                                    td 0#{history.user.phone}
                 else
                     .card-content
                         center.p-5

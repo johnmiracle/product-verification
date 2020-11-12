@@ -1,0 +1,13 @@
+extends layout
+include ./mixins/_flash-messages
+//-  - const qrScanner = new QrScanner(videoElem, result => console.log('decoded qr code:', result));
+
+block content
+    video#preview
+    .btn-group.btn-group-toggle.mb-5(data-toggle='buttons')
+        label.btn.btn-primary.active
+            input(type='radio' name='options' value='1' autocomplete='off' checked='')
+            |  Front Camera
+        label.btn.btn-secondary
+            input(type='radio' name='options' value='2' autocomplete='off')
+            |  Back Camera
