@@ -23,21 +23,19 @@ const { htmlPrefilter } = require("jquery");
 window.QRScanner;
 
 // this.video.setAttribute("playsinline", null)
-
+import { register } from "../controllers";
 
 router.get("/scan", function (req, res, next) {
   res.render("scan");
 });
 
 router.get("/qr-scanner", function (req, res, next) {
-
-  res.render("scan")
+  res.render("scan");
   // let scan = req.body.scan;
 
   // const qrScanner = new QrScanner(videoElem, (result) =>
   //   console.log("decoded qr code:", result)
   // );
-
 });
 
 /* GET home page. */
@@ -177,39 +175,41 @@ router.post("/login", function (req, res, next) {
   })(req, res, next);
 });
 
-router.post("/register", async function (req, res, next) {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const phone = req.body.phone;
-  const password = req.body.password;
+router.post("register", register);
 
-  let user = await User.findOne({ phone: req.body.phone });
-  if (user) {
-    req.flash(
-      "alert alert-danger",
-      "Phone Number is already registered, Please login"
-    );
-    res.redirect("/");
-  } else {
-    const user = new User({
-      firstName,
-      lastName,
-      phone,
-      password,
-    });
-    bcrypt.hash(user.password, 10, (err, hash) => {
-      user.password = hash;
-      user.save(function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          req.flash("success", "Registration is successfull, Please Login");
-          res.redirect("/");
-        }
-      });
-    });
-  }
-});
+// router.post("/register", async function (req, res, next) {
+//   const firstName = req.body.firstName;
+//   const lastName = req.body.lastName;
+//   const phone = req.body.phone;
+//   const password = req.body.password;
+
+//   let user = await User.findOne({ phone: req.body.phone });
+//   if (user) {
+//     req.flash(
+//       "alert alert-danger",
+//       "Phone Number is already registered, Please login"
+//     );
+//     res.redirect("/");
+//   } else {
+//     const user = new User({
+//       firstName,
+//       lastName,
+//       phone,
+//       password,
+//     });
+//     bcrypt.hash(user.password, 10, (err, hash) => {
+//       user.password = hash;
+//       user.save(function (err) {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           req.flash("success", "Registration is successfull, Please Login");
+//           res.redirect("/");
+//         }
+//       });
+//     });
+//   }
+// });
 
 router.get("/history", isAuthenticated, isUser, async function (
   req,
@@ -417,7 +417,6 @@ router.get("/export", isAuthenticated, isAdmin, async function (
   // res.render("user", { users });
 });
 
-
 router.get("/used_product", isAuthenticated, isAdmin, async function (
   req,
   res,
@@ -427,7 +426,7 @@ router.get("/used_product", isAuthenticated, isAdmin, async function (
     const histories = await History.find({}).populate("user");
     res.render("used-product", { histories });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     req.flash("");
     res.redirect("/used_product");
   }
